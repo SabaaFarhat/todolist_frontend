@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import AddTask from './components/addTask';
+import ListTasks from './components/ListTasks';
+import Navbar from './components/Navbar';
+import styled from 'styled-components';
 
-function App() {
+
+const App = () => {
+  const [task, setTask] = useState({
+    taskName: "",
+    completed: false,
+  });
+
+  const Container = styled.div`
+  background: #e5e7e9;
+  height: 100vh;
+`;
+
   return (
+    <Container>
+       <Navbar />
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <br/>
+      <h2>Task App</h2>
+      <AddTask task={task} setTask={setTask} />
+      <ListTasks setTask={setTask} />
     </div>
+    </Container>
   );
-}
+};
 
 export default App;
