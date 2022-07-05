@@ -1,11 +1,13 @@
-import { Button, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import '../App.css';
 import { tasksAdd, updateTask } from '../redux/slices/taskSlice';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { CircularProgress } from '@mui/material';
 
 const AddTask = ({ task, setTask }) => {
   const dispatch = useDispatch();
-  const tasksState = useSelector((state) => state.tasks);
+  const tasksState = useSelector((state) => state.tasksState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,22 +32,16 @@ const AddTask = ({ task, setTask }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter a task"
-          value={task.taskName}
-          onChange={(e) => setTask({ ...task, taskName: e.target.value })}
-        />
-        <br />
-        <button
-          type="submit"
-          variant="contained"
-          size="small"
-          sx={{
-            margin: '0.9rem 0rem',
-            fontFamily: "'Abel', 'sansSerif'",
-          }}
-        >
+        <span className="p-float-label">
+          <InputText
+            id="in"
+            value={task.taskName}
+            onChange={(e) => setTask({ ...task, taskName: e.target.value })}
+          />
+          <label htmlFor="in">Task Name</label>
+        </span>
+
+        <Button type="submit" variant="contained">
           {tasksState.addTaskStatus === 'pending' ||
           tasksState.updateTaskStatus === 'pending' ? (
             <CircularProgress size={24} color="secondary" />
@@ -54,7 +50,7 @@ const AddTask = ({ task, setTask }) => {
           ) : (
             'Add Task'
           )}
-        </button>
+        </Button>
         {tasksState.addTaskStatus === 'rejected' ? (
           <alert severity="error">{tasksState.addTaskError}</alert>
         ) : null}
