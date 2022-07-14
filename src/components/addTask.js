@@ -4,10 +4,17 @@ import { tasksAdd, updateTask } from '../redux/slices/taskSlice';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { CircularProgress } from '@mui/material';
+import { useState } from 'react';
 
-const AddTask = ({ task, setTask }) => {
+const AddTask = () => {
   const dispatch = useDispatch();
   const tasksState = useSelector((state) => state.tasksState);
+
+  const [task, setTask] = useState({
+    taskName: '',
+    completed: false,
+  });
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +28,7 @@ const AddTask = ({ task, setTask }) => {
       };
 
       dispatch(tasksAdd(newTask));
+      window.location.reload(false);
     }
 
     setTask({
@@ -31,8 +39,8 @@ const AddTask = ({ task, setTask }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <span className="p-float-label">
+      <form onSubmit={handleSubmit} >
+        <span className="p-float-label" >
           <InputText
             id="in"
             value={task.taskName}

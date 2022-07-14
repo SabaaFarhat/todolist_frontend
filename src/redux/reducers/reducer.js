@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteTask, getTasks, tasksAdd, updateTask } from "./slices/taskSlice";
+import { deleteTask, getTaskById, getTasks, tasksAdd, updateTask } from "../slices/taskSlice";
 
 const initialState = {
   tasks: [],
@@ -22,13 +22,6 @@ const tasksSlice = createSlice({
       return {
         ...state,
         addTaskStatus: "pending",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [tasksAdd.fulfilled]: (state, action) => {
@@ -37,13 +30,7 @@ const tasksSlice = createSlice({
         ...state,
         tasks: [action.payload, ...state.tasks],
         addTaskStatus: "success",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
+        
       };
     },
     [tasksAdd.rejected]: (state, action) => {
@@ -51,65 +38,32 @@ const tasksSlice = createSlice({
         ...state,
         addTaskStatus: "rejected",
         addTaskError: action.payload,
-        getTasksStatus: "",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [getTasks.pending]: (state, action) => {
       return {
         ...state,
-        addTaskStatus: "",
-        addTaskError: "",
         getTasksStatus: "pending",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [getTasks.fulfilled]: (state, action) => {
       return {
         ...state,
         tasks: action.payload,
-        addTaskStatus: "",
-        addTaskError: "",
         getTasksStatus: "success",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [getTasks.rejected]: (state, action) => {
       return {
         ...state,
-        addTaskStatus: "",
-        addTaskError: "",
         getTasksStatus: "rejected",
         getTasksError: action.payload,
-        deleteTaskStatus: "",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [deleteTask.pending]: (state, action) => {
       return {
         ...state,
-        addTaskStatus: "",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
         deleteTaskStatus: "pending",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [deleteTask.fulfilled]: (state, action) => {
@@ -119,40 +73,20 @@ const tasksSlice = createSlice({
       return {
         ...state,
         tasks: currentTasks,
-        addTaskStatus: "",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
         deleteTaskStatus: "success",
-        deleteTaskError: "",
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [deleteTask.rejected]: (state, action) => {
       state = {
         ...state,
-        addTaskStatus: "",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
         deleteTaskStatus: "rejected",
         deleteTaskError: action.payload,
-        updateTaskStatus: "",
-        updateTaskError: "",
       };
     },
     [updateTask.pending]: (state, action) => {
       return {
         ...state,
-        addTaskStatus: "",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
         updateTaskStatus: "pending",
-        updateTaskError: "",
       };
     },
     [updateTask.fulfilled]: (state, action) => {
@@ -162,27 +96,34 @@ const tasksSlice = createSlice({
       return {
         ...state,
         tasks: updatedTasks,
-        addTaskStatus: "",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
         updateTaskStatus: "success",
-        updateTaskError: "",
       };
     },
     [updateTask.rejected]: (state, action) => {
       return {
         ...state,
-        addTaskStatus: "",
-        addTaskError: "",
-        getTasksStatus: "",
-        getTasksError: "",
-        deleteTaskStatus: "",
-        deleteTaskError: "",
         updateTaskStatus: "rejected",
         updateTaskError: action.payload,
+      };
+    },
+    [getTaskById.pending]: (state, action) => {
+      return {
+        ...state,
+        getTasksStatus: "pending",
+      };
+    },
+    [getTaskById.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        tasks: action.payload,
+        getTasksStatus: "success",
+      };
+    },
+    [getTaskById.rejected]: (state, action) => {
+      return {
+        ...state,
+        getTasksStatus: "rejected",
+        getTasksError: action.payload,
       };
     },
   },

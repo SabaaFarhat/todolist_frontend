@@ -28,6 +28,17 @@ export const getTasks = createAsyncThunk(
   }
 );
 
+export const getTaskById = createAsyncThunk('tasks/getTaskById', async (id) => {
+  try {
+    const task = await axios.get(baseURL + id).catch((err) => {
+      console.log(err);
+    });
+    return task.data;
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
 export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (id, { rejectWithValue }) => {
@@ -43,21 +54,12 @@ export const deleteTask = createAsyncThunk(
 
 export const updateTask = createAsyncThunk(
   'tasks/updateTask',
-  async (task, { rejectWithValue }) => {
+  async (task, id, { rejectWithValue }) => {
     try {
-      const {
-        _id,
-        taskName,
-        author,
-        completed,
-        startedDate,
-        finishedDate,
-        Duration,
-      } = task;
+      const { taskName, completed, startedDate, finishedDate, Duration } = task;
 
-      const response = await axios.put(baseURL + 'updateTask/' + _id, {
+      const response = await axios.put(baseURL + 'updateTask/' + id, {
         taskName,
-        author,
         completed,
         startedDate,
         finishedDate,
@@ -70,3 +72,14 @@ export const updateTask = createAsyncThunk(
     }
   }
 );
+
+// export async function updateTask(id, task) {
+//   return await axios
+//     .put(baseURL+ 'updateTask/' + id, task, {})
+//     .then((res) => {
+//       console.log("task updated!");
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }

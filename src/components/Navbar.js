@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Nav>
-      <Logo href="">
-        LOGO<span>Codes</span>
-      </Logo>
+      <Logo href="">LOGO</Logo>
       <Hamburger onClick={() => setIsOpen(!isOpen)}>
         <span />
         <span />
         <span />
       </Hamburger>
       <Menu isOpen={isOpen}>
-        <MenuLink href="">Login</MenuLink>
+        <MenuLink href="/users/signin">Login</MenuLink>
+        <MenuLink href="/users/signup">Sign Up</MenuLink>
       </Menu>
     </Nav>
   );
@@ -41,7 +40,7 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: white;
+  background: #e5e7e9;
   position: absolute;
   top: 0;
   left: 0;
@@ -68,7 +67,7 @@ const Menu = styled.div`
   @media (max-width: 768px) {
     overflow: hidden;
     flex-direction: column;
-    max-height: ${({ isOpen }) => (isOpen ? "300px" : "0")};
+    max-height: ${({ isOpen }) => (isOpen ? '300px' : '0')};
     transition: max-height 0.3s ease-in;
     width: 100%;
   }
