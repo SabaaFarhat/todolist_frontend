@@ -11,6 +11,8 @@ async function signIn(user) {
     .post(baseURL + 'login', user, {})
     .then((res) => {
       console.log('user connected');
+      localStorage.setItem('token', res.data.tokens.access.token);
+      // console.log('token', res.data);
     })
     .catch((err) => {
       console.log(err);

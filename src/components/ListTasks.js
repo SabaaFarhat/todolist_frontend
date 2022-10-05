@@ -37,18 +37,26 @@ const ListTasks = ({ setTask }) => {
       <div>
       <AddTask  />
       </div>
-      <h2> You have {tasks && tasks.length} tasks </h2>
+      <h2 className='h2'> You have {tasks && tasks.length} tasks </h2>
       <div className="grid">
+        
         {tasksState.getTasksStatus === 'pending' ? <CircularProgress /> : null}
         {tasks?.map((task) => (
+          
           <div className="card m-3 surface-border" key={task._id}>
-            <Card title={task.taskName} style={{ width: '25em' }}>
+                 <div class="board-lists">
+      <div class="board-list">
+      <div class="list-title">
+          Resources
+        </div>
+
+        <Card title={task.taskName} style={{ width: '25em' }} class="card">
               <span className="font-bold text-l text-500">
                 Added {moment(task.startedDate).fromNow()}
               </span>
 
               <p>
-                Duration{' '}
+                Duration{' 25'}
                 <span className="font-bold text-xl text-500">
                   {task.Duration}
                 </span>{' '}
@@ -60,20 +68,26 @@ const ListTasks = ({ setTask }) => {
 
               <span>
                 <Button
-                  label="Update"
+                  // label="Update"
                   icon="pi pi-undo"
                   //onClick={() => setTask({ ...task })}
                   onClick={() => handleUpdate(task._id)}
                 />
                 
                 <Button
-                  label="Delete"
+                  // label="Delete"
                   icon="pi pi-times"
                   className="p-button-secondary ml-2"
                   onClick={() => handleDelete(task._id)}
                 />
               </span>
             </Card>
+        <div class="add-card">
+          + Add another card
+        </div>
+      </div>
+    </div>
+            
           </div>
         ))}
       </div>

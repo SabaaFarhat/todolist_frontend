@@ -19,14 +19,14 @@ const App = () => {
 
 
   const Container = styled.div`
-    background: #e5e7e9;
-    height: 100vh;
+
   `;
 
   return (
     <Container>
       <div style={{paddingBottom:"100px"}}>
-      <Navbar /></div>
+      <Navbar /> 
+      </div>
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route path="/tasks" element={<ListTasks />}></Route>

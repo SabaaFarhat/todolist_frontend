@@ -40,16 +40,18 @@ const AddTask = () => {
   return (
     <>
       <form onSubmit={handleSubmit} >
+        <br/>
+      <label className='search'>Search :</label>
         <span className="p-float-label" >
           <InputText
             id="in"
             value={task.taskName}
             onChange={(e) => setTask({ ...task, taskName: e.target.value })}
           />
-          <label htmlFor="in">Task Name</label>
+          <label htmlFor="in" >Task Name</label>
         </span>
 
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" icon="pi pi-plus-circle" className='btn' style={{width :'200px'}} >
           {tasksState.addTaskStatus === 'pending' ||
           tasksState.updateTaskStatus === 'pending' ? (
             <CircularProgress size={24} color="secondary" />

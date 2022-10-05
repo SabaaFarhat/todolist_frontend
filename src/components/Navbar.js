@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import logo from '../assets/todoicon.jpg';
+import '../assets/style.css';
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Nav>
-      <Logo href="">LOGO</Logo>
+      <img src={logo} alt="jobify" className="logo" />
+      <span className='todo'>ToDoList</span>
       <Hamburger onClick={() => setIsOpen(!isOpen)}>
         <span />
         <span />
         <span />
       </Hamburger>
       <Menu isOpen={isOpen}>
-        <MenuLink href="/users/signin">Login</MenuLink>
-        <MenuLink href="/users/signup">Sign Up</MenuLink>
+        {/* <MenuLink href="/users/signin">Login</MenuLink>
+        <MenuLink href="/users/signup">Register</MenuLink> */}
+        <MenuLink href="/users/signup">Logout </MenuLink>
       </Menu>
     </Nav>
   );
@@ -64,6 +69,7 @@ const Menu = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  font-weight: bold;
   @media (max-width: 768px) {
     overflow: hidden;
     flex-direction: column;

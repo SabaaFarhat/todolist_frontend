@@ -9,7 +9,7 @@ import { Divider } from 'primereact/divider';
 import { useNavigate, useParams } from 'react-router-dom';
 import { classNames } from 'primereact/utils';
 
-import '../App.css';
+// import '../App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTaskById, updateTask } from '../redux/slices/taskSlice';
 
@@ -104,10 +104,11 @@ export const UpdateTask = () => {
             validate={validate}
             render={() => (
               <form className="p-fluid">
-                <Field
+                <Field 
+                
                   name="taskName"
                   render={({ input, meta }) => (
-                    <div className="field">
+                    <div className="field" >
                       <span className="p-float-label">
                         <InputText
                           id="taskName"
